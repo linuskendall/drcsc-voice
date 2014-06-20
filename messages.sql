@@ -1,5 +1,5 @@
 --
--- Table structure for table `messages`
+-- Each message in the system
 --
 DROP TABLE IF EXISTS `messages`;
 
@@ -12,3 +12,16 @@ CREATE TABLE `messages` (
   `archived` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Used to store user meta data
+--
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `ìd` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `callid` varchar(255) NOT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `language` varchar(3) DEFAULT 'bn',
+   PRIMARY KEY (`callid`)
+)
