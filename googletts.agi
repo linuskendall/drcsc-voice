@@ -53,7 +53,7 @@ my $lang = "en";
 my $samplerate = 8000;
 
 # Output speed factor           #
-my $speed = 1.2;
+my $speed = 1;
 
 # Use of cache mechanism        #
 my $usecache = 1;

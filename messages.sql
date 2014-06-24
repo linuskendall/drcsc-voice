@@ -26,3 +26,13 @@ CREATE TABLE `users` (
   `language` varchar(3) DEFAULT 'bn',
    PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Used to store listened messages 
+--
+DROP TABLE IF EXISTS `listened`;
+
+CREATE TABLE `listened` (
+  `message_id` mediumint(9) NOT NULL,
+  `user_id` mediumint(9) NOT NULL
+) ENGINE=MyISAM;
