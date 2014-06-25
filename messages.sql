@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
-  `callid` varchar(255) NOT NULL,
+  `callerid` varchar(255) NOT NULL,
   `location` varchar(255) DEFAULT NULL,
   `language` varchar(3) DEFAULT 'bn',
    PRIMARY KEY (`id`)
@@ -36,3 +36,20 @@ CREATE TABLE `listened` (
   `message_id` mediumint(9) NOT NULL,
   `user_id` mediumint(9) NOT NULL
 ) ENGINE=MyISAM;
+
+-- 
+-- Logging table
+--
+DROP TABLE IF EXISTS `log`;
+
+CREATE TABLE `log` (
+  `dt` datetime DEFAULT NULL,
+  `callid` varchar(255) DEFAULT NULL,
+  `callerid` varchar(255) DEFAULT NULL,
+  `user_id` mediumint(8) DEFAULT NULL,
+  `context` varchar(255) DEFAULT NULL,
+  `exten` varchar(255) DEFAULT NULL,
+  `prio` varchar(255) DEFAULT NULL,
+  `action` varchar(255) DEFAULT NULL,
+  `action_params` varchar(255) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
