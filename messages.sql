@@ -11,6 +11,7 @@ CREATE TABLE `messages` (
   `filename` varchar(255) DEFAULT NULL,
   `replyto` mediumint(9) DEFAULT NULL,
   `archived` tinyint(1) DEFAULT NULL,
+  `dt` datetime,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
