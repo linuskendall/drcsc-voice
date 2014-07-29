@@ -27,7 +27,7 @@ normalize-audio -m *.wav
 
 Use sox to transcode your wav files into a format that Asterisk will understand:
 ```
-for a in *.wav; do sox "$a"  -r 8k -c 1 -e gsm "`echo $a|sed -e s/wav//`gsm"; done
+for a in *.wav; do sox "$a"  -t raw -r 8k -e signed-integer -b 16 -c 1 "`echo $a|sed -e s/wav//`sln"; done
 ```
 
 ## Done
