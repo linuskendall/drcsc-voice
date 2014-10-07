@@ -1,6 +1,7 @@
 --
 -- Each message in the system
 --
+
 DROP TABLE IF EXISTS `messages`;
 
 CREATE TABLE `messages` (
@@ -11,13 +12,14 @@ CREATE TABLE `messages` (
   `filename` varchar(255) DEFAULT NULL,
   `replyto` mediumint(9) DEFAULT NULL,
   `archived` tinyint(1) DEFAULT NULL,
-  `dt` datetime,
+  `dt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=155 DEFAULT CHARSET=latin1;
 
 --
 -- Used to store user meta data
 --
+
 DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE `users` (
@@ -25,22 +27,26 @@ CREATE TABLE `users` (
   `callerid` varchar(255) NOT NULL,
   `location` varchar(255) DEFAULT NULL,
   `language` varchar(3) DEFAULT 'bn',
-   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+  `role` mediumint(9) DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
+  `blocked` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
--- Used to store listened messages 
+-- Used to store listened messages
 --
+
 DROP TABLE IF EXISTS `listened`;
-
 CREATE TABLE `listened` (
   `message_id` mediumint(9) NOT NULL,
   `user_id` mediumint(9) NOT NULL
-) ENGINE=MyISAM;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- 
+--
 -- Logging table
 --
+
 DROP TABLE IF EXISTS `log`;
 
 CREATE TABLE `log` (
