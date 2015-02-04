@@ -2,19 +2,19 @@ import MySQLdb
 conn = MySQLdb.connect(host='127.0.0.1', unix_socket='/tmp/mysql.sock', user='root', passwd='default', db='drcsc') 
 cur = conn.cursor() 
 
-cur.execute("SELECT COUNT(*) FROM messages WHERE replyto = -1")
+cur.execute("SELECT COUNT(*) FROM messages WHERE replyto = -1 AND archived != 1")
 questions = cur.fetchone()
 
 cur.execute("SELECT COUNT(*) FROM messages AS q INNER JOIN messages AS a ON a.replyto = q.id WHERE q.replyto = -1");
 answered = cur.fetchone()
 
-cur.execute("SELECT COUNT(*) FROM messages WHERE replyto=-1 AND id NOT IN (select replyto from messages where replyto != -1)");
+cur.execute("SELECT COUNT(*) FROM messages WHERE replyto=-1 AND id NOT IN (select replyto from messages where replyto != -1) AND archived != 1");
 unanswered = cur.fetchone()
 
 cur.execute("SELECT COUNT(*) FROM messages WHERE replyto != -1");
 answers = cur.fetchone()
 
-cur.execute("SELECT MIN(dt) FROM messages WHERE replyto=-1 AND id NOT IN (select replyto from messages where replyto != -1)");
+cur.execute("SELECT MIN(dt) FROM messages WHERE replyto=-1 AND id NOT IN (select replyto from messages where replyto != -1) AND archived != 1");
 oldest_unanswered = cur.fetchone()
 
 cur.execute("SELECT MAX(q.dt) FROM messages AS q INNER JOIN messages AS a ON a.replyto = q.id WHERE q.replyto = -1");
@@ -44,10 +44,10 @@ monthly_users = cur.fetchone()
 cur.execute("SELECT COUNT(DISTINCT callid) FROM log WHERE callerid != 100")
 calls = cur.fetchone()
 
-cur.execute("SELECT COUNT(DISTINCT callid) FROM log WHERE dt > (NOW() - INTERVAL 7 DAY)")
+cur.execute("SELECT COUNT(DISTINCT callid) FROM log WHERE dt > (NOW() - INTERVAL 7 DAY) AND callerid != 100")
 weekly_calls = cur.fetchone()
 
-cur.execute("SELECT COUNT(DISTINCT callid) FROM log WHERE dt > (NOW() - INTERVAL 1 MONTH)")
+cur.execute("SELECT COUNT(DISTINCT callid) FROM log WHERE dt > (NOW() - INTERVAL 1 MONTH) AND callerid != 100")
 monthly_calls = cur.fetchone()
 
 print "Total questions: %s" % questions
