@@ -1,0 +1,35 @@
+#!/usr/bin/perl -w
+
+use File::Copy;
+
+my %AGI;
+my $name;
+
+# Store AGI input #
+while (<STDIN>) {
+	chomp;
+	last if (!length);
+	$AGI{$1} = $2 if (/^agi_(\w+)\:\s+(.*)$/);
+}
+#($AGI{arg_1},$AGI{arg_2},$AGI{arg_3},$AGI{arg_4}) = @ARGV;
+
+$name = " -- $AGI{request}:";
+$callfile = "$AGI{uniqueid}.call";
+
+open(FILE, ">>/tmp/$callfile");
+
+print FILE "Channel: Dongle/$AGI{arg_4}/$AGI{callerid}\n";
+print FILE "Callerid: $AGI{callerid}\n";
+print FILE "WaitTime: 45\n";
+print FILE "MaxRetries: 3\n";
+print FILE "RetryTime: 120\n";
+print FILE "Context: $AGI{arg_1}\n";
+print FILE "Extension: $AGI{arg_2}\n";
+print FILE "Priority: $AGI{arg_3}\n";
+print FILE "Archive: yes\n";
+
+close(FILE);
+
+move("/tmp/$callfile","/var/spool/asterisk/outgoing/$callfile");
+
+exit(0);
